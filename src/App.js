@@ -7,7 +7,7 @@ class App extends Component {
     super();
 
     this.state = {
-      name: "bj"
+      name: { firstName: "bj", lastName: "sh" }
     };
   }
   render() {
@@ -15,10 +15,20 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <p>Hi {this.state.name}</p>
+          <p>Hi {this.state.name.firstName} {this.state.name.lastName}</p>
           <button
             onClick={ () => {
-              this.setState({name: "Yihua"})
+              this.setState(
+                () => {
+                  return {
+                    name: { firstName: "andrei", lastName: "lala" }
+                  };
+                },
+                () => {
+                  // optional callback to ensure it will execute the function only after setting state
+                  console.log(this.state);
+                }
+              );
             }}
           >
             Change Name
