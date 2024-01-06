@@ -7,7 +7,8 @@ class App extends Component {
     super();
 
     this.state = {
-      monsters: []
+      monsters: [],
+      searchString: ''
     };
   }
 
@@ -28,10 +29,28 @@ class App extends Component {
 
   // when state changes(Setstate), it will re-render the component by calling render multiple times
   render() {
+    const filteredMonsters = this.state.monsters.filter((monster) => {
+      return monster.name.toLowerCase().includes(this.state.searchString);
+    });
+
     return (
       <div className="App">
+        <input
+          className='search-box'
+          type='search'
+          placeholder='Search monsters'
+          onChange={ (event) => {
+            console.log(event.target.value);
+            const searchString = event.target.value.toLowerCase();
+
+            this.setState(() => {
+              // TIPS: same variable name will replace the value with the same key in state
+              return { searchString };
+            });
+          }}
+        />
         {
-          this.state.monsters.map((monster) => {
+          filteredMonsters.map((monster) => {
             return <h1 key={monster.id}>{monster.name}</h1>;
           })
         }
