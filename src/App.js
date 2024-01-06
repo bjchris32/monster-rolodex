@@ -39,8 +39,10 @@ class App extends Component {
 
   // when state changes(Setstate), it will re-render the component by calling render multiple times
   render() {
-    const filteredMonsters = this.state.monsters.filter((monster) => {
-      return monster.name.toLowerCase().includes(this.state.searchString);
+    const { monsters, searchString } = this.state;
+    const { onSearchChange } = this;
+    const filteredMonsters = monsters.filter((monster) => {
+      return monster.name.toLowerCase().includes(searchString);
     });
 
     return (
@@ -49,7 +51,7 @@ class App extends Component {
           className='search-box'
           type='search'
           placeholder='Search monsters'
-          onChange={this.onSearchChange}
+          onChange={onSearchChange}
         />
         {
           filteredMonsters.map((monster) => {
