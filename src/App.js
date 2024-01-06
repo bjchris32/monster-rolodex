@@ -27,6 +27,16 @@ class App extends Component {
       ));
   }
 
+  onSearchChange =  (event) => {
+    console.log(event.target.value);
+    const searchString = event.target.value.toLowerCase();
+
+    this.setState(() => {
+      // TIPS: same variable name will replace the value with the same key in state
+      return { searchString };
+    });
+  }
+
   // when state changes(Setstate), it will re-render the component by calling render multiple times
   render() {
     const filteredMonsters = this.state.monsters.filter((monster) => {
@@ -39,15 +49,7 @@ class App extends Component {
           className='search-box'
           type='search'
           placeholder='Search monsters'
-          onChange={ (event) => {
-            console.log(event.target.value);
-            const searchString = event.target.value.toLowerCase();
-
-            this.setState(() => {
-              // TIPS: same variable name will replace the value with the same key in state
-              return { searchString };
-            });
-          }}
+          onChange={this.onSearchChange}
         />
         {
           filteredMonsters.map((monster) => {
