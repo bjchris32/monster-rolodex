@@ -26,6 +26,7 @@ class App extends Component {
       ));
   }
 
+  // when state changes(Setstate), it will re-render the component by calling render multiple times
   render() {
     return (
       <div className="App">
